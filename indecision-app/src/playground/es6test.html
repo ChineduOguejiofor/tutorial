@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const multiplier = {
+        numbers: [2, 4, 6],
+        multiplyby: 2,
+        multiply() {
+          return this.numbers.map(num => num * this.multiplyby);
+        }
+      };
+
+      console.log(multiplier.multiply());
+    </script>
+  </body>
+</html>
