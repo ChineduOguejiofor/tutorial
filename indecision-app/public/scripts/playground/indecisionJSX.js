@@ -94,39 +94,3 @@ var appRender = function appRender() {
 
   ReactDOM.render(template, appRoot);
 };
-var toggle = false;
-var showDetails = function showDetails() {
-  // if (toggle) {
-  //   toggle = false;
-  // } else {
-  //   toggle = true;
-  // }
-  toggle = !toggle;
-  appVisible();
-};
-
-var appVisible = function appVisible() {
-  var template3 = React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'h1',
-      null,
-      'Visibility Toggle'
-    ),
-    React.createElement(
-      'button',
-      { onClick: showDetails },
-      ' ',
-      toggle ? 'Hide Details' : 'Show Details'
-    ),
-    toggle ? React.createElement(
-      'p',
-      null,
-      'Hey, I am now visible'
-    ) : ''
-  );
-  ReactDOM.render(template3, appRoot);
-};
-
-appVisible();

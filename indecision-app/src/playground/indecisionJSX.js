@@ -58,29 +58,3 @@ const appRender = () => {
 
   ReactDOM.render(template, appRoot);
 };
-let toggle = false;
-const showDetails = () => {
-  // if (toggle) {
-  //   toggle = false;
-  // } else {
-  //   toggle = true;
-  // }
-  toggle = !toggle;
-  appVisible();
-};
-
-const appVisible = () => {
-  const template3 = (
-    <div>
-      <h1>Visibility Toggle</h1>
-      <button onClick={showDetails}>
-        {' '}
-        {toggle ? 'Hide Details' : 'Show Details'}
-      </button>
-      {toggle ? <p>Hey, I am now visible</p> : ''}
-    </div>
-  );
-  ReactDOM.render(template3, appRoot);
-};
-
-appVisible();
