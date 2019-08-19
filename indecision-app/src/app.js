@@ -1,46 +1,67 @@
-const app = {
-  title: 'My APP',
-  subtitle: 'This is a lovely App',
-  options: ['one', 'two']
-};
-const getSubtitle = subtitle => {
-  if (subtitle) {
-    return <p>{subtitle}</p>;
+class Indecision extends React.Component {
+  render() {
+    const title = 'Indecision';
+    const subtitle = 'Put your life in the hands of a computer';
+    const options = ['one', 'two', 'three'];
+    return (
+      <div>
+        <Header title={title} subtitle={subtitle} />
+        <Action />
+        <Options options={options} />
+        <AddOption />
+      </div>
+    );
   }
-};
-// const getoptions = () => {
-//  let newTag = ol
-//  app.options.forEach(element => {
-//   <p>element</p>;
-// }};
+}
 
-const template = (
-  <div>
-    <h1>{app.title}</h1>
-    {getSubtitle(app.subtitle)}
-    <p>
-      Options: {app.options.length > 0 ? 'Here are your options' : 'No Options'}
-    </p>
-  </div>
-);
-const user = {
-  userName: 'Chinedu 0',
-  age: 61,
-  mylocation: 'Boston M'
-};
-
-// const mylocation = 'Changed M';
-const getLocation = Rlocation => {
-  if (Rlocation) {
-    return <p>Location: {Rlocation}</p>;
+class Header extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>{this.props.title}</h1>
+        <h2>{this.props.subtitle}</h2>
+      </div>
+    );
   }
-};
-const template2 = (
-  <div>
-    <h1>{user.userName}</h1>
-    {user.age >= 18 && <p>Age: {user.age}</p>}
-    {getLocation(user.mylocation)}
-  </div>
-);
-const appRoot = document.getElementById('app');
-ReactDOM.render(template, appRoot);
+}
+
+class Action extends React.Component {
+  render() {
+    return (
+      <div>
+        <button>what should I do?</button>
+      </div>
+    );
+  }
+}
+
+class Options extends React.Component {
+  render() {
+    return (
+      <div>
+        {this.props.options.map((option, index) => {
+          return <Option key={index} optionText={option} />;
+        })}
+      </div>
+    );
+  }
+}
+
+class AddOption extends React.Component {
+  render() {
+    return (
+      <div>
+        <h2>AddOptions here</h2>
+        <Option />
+      </div>
+    );
+  }
+}
+
+class Option extends React.Component {
+  render() {
+    return <div>Option: {this.props.optionText}</div>;
+  }
+}
+
+ReactDOM.render(<Indecision />, document.getElementById('app'));
