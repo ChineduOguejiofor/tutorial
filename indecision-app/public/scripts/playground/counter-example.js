@@ -20,7 +20,7 @@ var Counter = function (_React$Component) {
     _this.minusOne = _this.minusOne.bind(_this);
     _this.reset = _this.reset.bind(_this);
     _this.state = {
-      count: 0
+      count: props.counter
     };
     return _this;
   }
@@ -86,7 +86,10 @@ var Counter = function (_React$Component) {
   return Counter;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Counter, null), document.getElementById('app'));
+Counter.defaultProps = {
+  counter: 0
+};
+ReactDOM.render(React.createElement(Counter, { counter: 5 }), document.getElementById('app'));
 
 // let count = 0;
 // const addOne = () => {
