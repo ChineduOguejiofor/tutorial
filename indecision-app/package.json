@@ -4,18 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "webpack --watch",
     "start": "babel-node ./src/app",
-    "build": "babel --presets env src -d public/scripts --watch"
+    "build-babel": "babel --presets env src -d public/scripts --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.5.5",
     "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1"
+    "babel-loader": "^8.0.6",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "validator": "^11.1.0",
+    "webpack": "^3.1.0",
+    "webpack-dev-server": "^3.8.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
     "nodemon": "^1.19.1"
   }
 }
