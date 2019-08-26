@@ -17,6 +17,7 @@ var Indecision = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Indecision.__proto__ || Object.getPrototypeOf(Indecision)).call(this, props));
 
     _this.deleteOptions = _this.deleteOptions.bind(_this);
+    _this.deleteOption = _this.deleteOption.bind(_this);
     _this.randPick = _this.randPick.bind(_this);
     _this.createOption = _this.createOption.bind(_this);
     _this.state = {
@@ -26,10 +27,49 @@ var Indecision = function (_React$Component) {
   }
 
   _createClass(Indecision, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      console.log('I fired');
+
+      try {
+        var json = localStorage.getItem('options');
+        var options = JSON.parse(json);
+
+        if (options) {
+          this.setState(function () {
+            return { options: options };
+          });
+        }
+      } catch (error) {
+        console.log('Failed on Error ' + error);
+      }
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      console.log('I fired did updated');
+
+      if (prevState.options.length !== this.state.options.length) {
+        var json = JSON.stringify(this.state.options);
+        localStorage.setItem('options', json);
+      }
+    }
+  }, {
     key: 'deleteOptions',
     value: function deleteOptions() {
       this.setState(function () {
         return { options: [] };
+      });
+    }
+  }, {
+    key: 'deleteOption',
+    value: function deleteOption(optionToRemove) {
+      this.setState(function (prevState) {
+        return {
+          options: prevState.options.filter(function (option) {
+            return optionToRemove !== option;
+          })
+        };
       });
     }
   }, {
@@ -66,7 +106,8 @@ var Indecision = function (_React$Component) {
         }),
         React.createElement(Options, {
           options: this.state.options,
-          deleteOptions: this.deleteOptions
+          deleteOptions: this.deleteOptions,
+          handledeleteOption: this.deleteOption
         }),
         React.createElement(AddOption, { handleOption: this.createOption })
       );
@@ -121,8 +162,17 @@ var Options = function Options(props) {
       { onClick: props.deleteOptions },
       'Remove All'
     ),
+    props.options.length === 0 && React.createElement(
+      'p',
+      null,
+      'Please add some options to get started!!'
+    ),
     props.options.map(function (option, index) {
-      return React.createElement(Option, { key: index, optionText: option });
+      return React.createElement(Option, {
+        key: index,
+        optionText: option,
+        handledeleteOption: props.handledeleteOption
+      });
     })
   );
 };
@@ -131,7 +181,16 @@ var Option = function Option(props) {
     'div',
     null,
     'Option: ',
-    props.optionText
+    props.optionText,
+    React.createElement(
+      'button',
+      {
+        onClick: function onClick(e) {
+          props.handledeleteOption(props.optionText);
+        }
+      },
+      'remove'
+    )
   );
 };
 
@@ -191,4 +250,4 @@ var AddOption = function (_React$Component2) {
   return AddOption;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Indecision, { options: ['Abiola', 'Samson'] }), document.getElementById('app'));
+ReactDOM.render(React.createElement(Indecision, null), document.getElementById('app'));
