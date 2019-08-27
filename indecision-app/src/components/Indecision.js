@@ -3,22 +3,34 @@ import AddOption from './AddOption';
 import Header from './Header';
 import Options from './Option';
 import Action from './Action';
+import OptionModal from './OptionModal';
 
 export default class Indecision extends React.Component {
-  constructor(props) {
-    super(props);
-    this.deleteOptions = this.deleteOptions.bind(this);
-    this.deleteOption = this.deleteOption.bind(this);
-    this.randPick = this.randPick.bind(this);
-    this.createOption = this.createOption.bind(this);
-    this.state = {
-      options: props.options
-    };
-  }
+  state = {
+    options: []
+  };
 
+  deleteOptions = () => {
+    this.setState(() => ({ options: [] }));
+  };
+  deleteOption = optionToRemove => {
+    this.setState(prevState => ({
+      options: prevState.options.filter(option => optionToRemove !== option)
+    }));
+  };
+  randPick = () => {
+    const randNum = Math.floor(Math.random() * this.state.options.length);
+    alert(this.state.options[randNum]);
+  };
+  createOption = option => {
+    if (!option) {
+      return 'Please enter a valid value to add item';
+    } else if (this.state.options.indexOf(option) > -1) {
+      return 'This option already exists';
+    }
+    this.setState(prevState => ({ options: prevState.options.concat(option) }));
+  };
   componentDidMount() {
-    console.log('I fired');
-
     try {
       const json = localStorage.getItem('options');
       const options = JSON.parse(json);
@@ -32,32 +44,10 @@ export default class Indecision extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('I fired did updated');
-
     if (prevState.options.length !== this.state.options.length) {
       const json = JSON.stringify(this.state.options);
       localStorage.setItem('options', json);
     }
-  }
-  deleteOptions() {
-    this.setState(() => ({ options: [] }));
-  }
-  deleteOption(optionToRemove) {
-    this.setState(prevState => ({
-      options: prevState.options.filter(option => optionToRemove !== option)
-    }));
-  }
-  randPick() {
-    const randNum = Math.floor(Math.random() * this.state.options.length);
-    alert(this.state.options[randNum]);
-  }
-  createOption(option) {
-    if (!option) {
-      return 'Please enter a valid value to add item';
-    } else if (this.state.options.indexOf(option) > -1) {
-      return 'This option already exists';
-    }
-    this.setState(prevState => ({ options: prevState.options.concat(option) }));
   }
   render() {
     const title = 'Indecision';
@@ -76,6 +66,7 @@ export default class Indecision extends React.Component {
           handledeleteOption={this.deleteOption}
         />
         <AddOption handleOption={this.createOption} />
+        <OptionModal />
       </div>
     );
   }
