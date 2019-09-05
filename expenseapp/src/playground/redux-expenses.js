@@ -1,6 +1,5 @@
 import { createStore, combineReducers } from 'redux';
 import uuid from 'uuid';
-import { create } from 'domain';
 
 const addExpense = ({
   description = '',
