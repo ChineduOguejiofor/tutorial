@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-export const Navbar = ({ icon, title }) => {
+const Navbar = ({ title, icon }) => {
   return (
-    <nav className='navbar bg-primary'>
+    <div className='navbar bg-primary '>
       <h1>
         <i className={icon} /> {title}
       </h1>
@@ -15,17 +15,17 @@ export const Navbar = ({ icon, title }) => {
           <Link to='/about'>About</Link>
         </li>
       </ul>
-    </nav>
+    </div>
   );
+};
+Navbar.propTypes = {
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.string
 };
 
 Navbar.defaultProps = {
-  title: 'Github Finder',
-  icon: 'fab fa-github'
+  title: 'Contact Keeper',
+  icon: 'fas fa-id-card-alt'
 };
 
-Navbar.propTypes = {
-  title: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired
-};
 export default Navbar;

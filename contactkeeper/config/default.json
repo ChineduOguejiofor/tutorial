@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://knight:yelppass@yelpcamp-pszhu.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "se23cre5?t"
+}
