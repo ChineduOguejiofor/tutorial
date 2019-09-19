@@ -10,6 +10,7 @@ const ContactForm = () => {
     } else {
       setContact({ name: '', email: '', phone: '', type: 'personal' });
     }
+    // eslint-disable-next-line
   }, [ContactContext, current]);
   const [contact, setContact] = useState({
     name: '',

@@ -47,7 +47,12 @@ img {
   overflow: hidden;
   padding: 0 2rem;
 }
-
+.form-container {
+  max-width: 800px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 4rem;
+}
 /* Text Styles*/
 .x-large {
   font-size: 4rem;
@@ -345,7 +350,21 @@ table td {
 table th {
   background: var(--light-color);
 }
-
+/*Animation*/
+.item-enter {
+  opacity: 0;
+}
+.item-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms ease-in;
+}
+.item-exit {
+  opacity: 1;
+}
+.item-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
 /* Navbar */
 .navbar {
   display: flex;
